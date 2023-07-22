@@ -1,0 +1,23 @@
+extends: default
+base:
+  font-family: Sans Serif
+font:
+  catalog:
+    Sans Serif:
+      normal: GenShinGothic-P-Regular.ttf
+      bold: GenShinGothic-P-Bold.ttf
+      italic: GenShinGothic-P-Regular.ttf
+      bold_italic: GenShinGothic-P-Bold.ttf
+    M+ 1mn:
+      normal: GEM_FONTS_DIR/mplus1mn-regular-subset.ttf
+      bold: GEM_FONTS_DIR/mplus1mn-bold-subset.ttf
+      italic: GEM_FONTS_DIR/mplus1mn-italic-subset.ttf
+      bold_italic: GEM_FONTS_DIR/mplus1mn-bold_italic-subset.ttf
+    M+ 1p Fallback:
+      normal: GEM_FONTS_DIR/mplus1mn-regular-subset.ttf
+      bold: GEM_FONTS_DIR/mplus1mn-bold-subset.ttf
+      italic: GEM_FONTS_DIR/mplus1mn-italic-subset.ttf
+      bold_italic: GEM_FONTS_DIR/mplus1mn-bold_italic-subset.ttf
+  fallbacks:
+    - Sans Serif
+    - M+ 1p Fallback

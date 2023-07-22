@@ -1,0 +1,31 @@
+name: maintenance_enable_branches_json
+on:
+  delete
+
+jobs:
+  maintenance_enable_branches_json:
+    name: Maintenance Enable Branches JSON
+    steps:
+      - name: Checkout GitHub Pages
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+          path: gh-pages
+      - name: Delete Branch Maintenance
+        working-directory: gh-pages
+        run: |
+          if [ ! -e docs/enable_branches.json ]; then
+            cp -p docs/enable_branches_template.json docs/enable_branches.json
+          fi
+          sed -i 's#^.*${{ github.event.ref }}.*$##g' docs/enable_branches.json
+          sed -i '/^$/d' docs/enable_branches.json
+          if [ -d docs/branches/${{ github.event.ref }} ]; then
+            git rm -rf docs/branches/${{ github.event.ref }}
+          fi
+          git commit -m "Delete Branch Maintenance." -a
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          directory: gh-pages
+          branch: gh-pages

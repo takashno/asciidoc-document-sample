@@ -1,0 +1,8 @@
+include::../../attributes.adoc[]
+:docinfodir: ../../../docinfo
+:imagesdir: ../../images
+
+= 概要（章）
+
+開発の設計ドキュメントなどをAsciiDocで記載し、 GitHubでVersion管理するサンプル. +
+また、GitHubPagesを用いてWebブラウザからビルドされたドキュメントを確認できるようにするサンプルも含んでいる.

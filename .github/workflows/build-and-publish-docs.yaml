@@ -1,0 +1,78 @@
+name: build_and_publish_docs
+on:
+  push:
+    branches:
+      - main
+      - release
+      - release/*
+      - develop
+      - develop/*
+      - feature/*
+
+jobs:
+  build_and_publish_docs:
+    name: publish
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Checkout GitHub Pages
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+          path: gh-pages
+      - name: test
+        run: ls -la
+      - name: SetUp Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: '17'
+      - name: SetUp Graphviz
+        run: |
+          sudo apt-get -y update
+          sudo apt-get -y install fonts-noto-cjk fonts-noto fonts-noto-cjk-extra
+          sudo apt-get -y install graphviz
+      - name: Clean files
+        working-directory: gh-pages
+        run: |
+          if [ ! -e docs/enable_branches.json ]; then
+            cp -p docs/enable_branches_template.json docs/enable_branches.json
+          fi
+          sed -i 's#^.*${{ github.ref_name }}.*$##g' docs/enable_branches.json
+          sed -i '/^$/d' docs/enable_branches.json
+          sed -i 's#^.*end.*end.*$#  {"name": "${{ github.ref_name }}", "commit_id": "${{ github.sha }}"},\n  {"name": "end", "commit_id": "end"}#g' docs/enable_branches.json
+          if [ -d docs/branches/${{ github.ref_name }}/html ]; then
+            git rm -rf docs/branches/${{ github.ref_name }}/html/*
+          fi
+          if [ -d docs/branches/${{ github.ref_name }}/pdf ]; then
+            git rm -rf docs/branches/${{ github.ref_name }}/pdf/*
+          fi
+          mkdir -p docs/branches/${{ github.ref_name }}/html/normal
+          mkdir -p docs/branches/${{ github.ref_name }}/html/single
+          mkdir -p docs/branches/${{ github.ref_name }}/pdf
+          touch docs/branches/${{ github.ref_name }}/html/normal/.gitkeep
+          touch docs/branches/${{ github.ref_name }}/html/single/.gitkeep
+          touch docs/branches/${{ github.ref_name }}/pdf/.gitkeep
+          cp docs/branches/index_template.html docs/branches/${{ github.ref_name }}/index.html
+      - name: Add Permission for gradlew
+        run: chmod +x gradlew
+      - name: Build Documents
+        run: ./gradlew clean asciidoctor asciidoctorSingle asciidoctorPdf
+      - name: Copy Build Documents
+        run: |
+          cp -r build/docs/asciidoc/* gh-pages/docs/branches/${{ github.ref_name }}/html/normal/
+          cp -r build/docs/asciidocSingle/* gh-pages/docs/branches/${{ github.ref_name }}/html/single/
+          cp build/docs/asciidocPdf/single.pdf gh-pages/docs/branches/${{ github.ref_name }}/pdf/index.pdf
+      - name: Commit files
+        working-directory: gh-pages
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add docs/*
+          git commit -m "Add changes" -a
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          directory: gh-pages
+          branch: gh-pages

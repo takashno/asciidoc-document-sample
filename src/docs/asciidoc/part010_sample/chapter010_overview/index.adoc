@@ -1,0 +1,8 @@
+include::../../attributes.adoc[]
+:docinfodir: ../../../docinfo
+:imagesdir: ../../images
+
+= 概要説明（部）
+
+[horizontal]
+<<chapter010_010_overview#, 概要（章 ）>> :: このリポジトリの概要説明

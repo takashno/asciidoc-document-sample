@@ -1,0 +1,191 @@
+@startuml template_usecase
+
+/' ---------------------------------------------- '/
+' 固定エリア
+
+'ヘッダー
+header
+
+<font color=red>公開</font>
+
+
+endheader
+
+
+'フッター
+right footer
+
+
+<b>Copyright &#169; 2023 takashno All Right Reserved.</b>　
+endfooter
+
+/' ---------------------------------------------- '/
+' スタイルエリア
+
+'必要なら追加
+
+skinparam {
+defaultFontName Meiryo
+ArrowColor black
+Shadow none
+shadowing false
+linetype ortho
+}
+skinparam artifact {
+BackgroundColor White
+BorderColor Black
+}
+skinparam actor {
+BackgroundColor White
+BorderColor Black
+}
+skinparam card {
+BackgroundColor White
+BorderColor Black
+}
+skinparam agent {
+BackgroundColor White
+BorderColor Black
+}
+skinparam boundary {
+BackgroundColor White
+BorderColor Black
+}
+skinparam usecase {
+BackgroundColor White
+BorderColor Black
+}
+skinparam component {
+BackgroundColor White
+BorderColor Black
+}
+skinparam folder {
+BackgroundColor White
+BorderColor Black
+}
+skinparam interface {
+BackgroundColor White
+BorderColor Black
+}
+skinparam frame {
+BackgroundColor White
+BorderColor Black
+}
+skinparam cloud {
+BackgroundColor White
+BorderColor Black
+}
+skinparam stack {
+BackgroundColor White
+BorderColor Black
+}
+skinparam queue {
+BackgroundColor White
+BorderColor Black
+}
+skinparam rectangle {
+BackgroundColor White
+BorderColor Black
+}
+skinparam database {
+BackgroundColor White
+BorderColor Black
+}
+skinparam control {
+BackgroundColor White
+BorderColor Black
+}
+skinparam file {
+BackgroundColor White
+BorderColor Black
+}
+skinparam entity {
+BackgroundColor White
+BorderColor Black
+}
+skinparam node {
+BackgroundColor White
+BorderColor Black
+}
+skinparam package {
+BackgroundColor White
+BorderColor Black
+}
+skinparam storage {
+BackgroundColor White
+BorderColor Black
+}
+skinparam note {
+BackgroundColor #dcf8f8
+BorderColor Black
+}
+
+/' ---------------------------------------------- '/
+' 描画エリア
+
+' 参考
+' http://plantuml.com/use-case-diagram#Usecase
+
+title 使える要素一覧
+
+actor アクター
+usecase ユースケース
+artifact 対象物
+card カード
+agent エージェント
+node ノード
+cloud クラウド
+component コンポーネント
+control コントロール
+database データベース
+entity エンティティ
+file ファイル
+folder フォルダー
+boundary boundary
+frame フレーム
+interface インターフェース
+package パッケージ
+queue キュー
+stack スタック
+rectangle レクタングル
+storage ストレージ
+
+frame 入れ子が可能です {
+ agent 子要素1
+ actor 子要素2
+ database 子要素3
+}
+
+
+アクター --> ユースケース
+アクター -le-> フレーム
+アクター -right-> レクタングル
+レクタングル -right-> キュー
+キュー -right-> ストレージ
+ストレージ --> スタック
+スタック --> 入れ子が可能です
+スタック --> boundary
+boundary --> インターフェース
+ユースケース -- 対象物
+対象物 .. カード
+カード ~~ エージェント
+note right {
+ノートも書けます
+}
+エージェント == ノード
+note left {
+ノートも書けます
+}
+ノード --* クラウド
+クラウド --o コンポーネント
+コンポーネント --+ コントロール
+コントロール --# データベース
+データベース -->> エンティティ
+エンティティ --0 ファイル
+ファイル --^ フォルダー
+フォルダー --(0 パッケージ
+
+
+
+
+@enduml

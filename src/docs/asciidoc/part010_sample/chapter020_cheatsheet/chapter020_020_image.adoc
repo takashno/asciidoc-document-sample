@@ -1,0 +1,15 @@
+include::../../attributes.adoc[]
+:docinfodir: ../../../docinfo
+:imagesdir: ../../images
+
+= 画像の使い方（章）
+
+== 画像の埋め込み（ユースケース）
+
+.ユースケース link:{imagesdir}/part010_sample/chapter020_cheatssheet/chapter020_020_image_usecase.svg[画像はこちら,window=_blank]
+image:part010_sample/chapter020_cheatssheet/chapter020_020_image_usecase.svg[]
+
+== 画像の埋め込み（シーケンス）
+
+.シーケンス link:{imagesdir}/part010_sample/chapter020_cheatssheet/chapter020_020_image_sequence.svg[画像はこちら,window=_blank]
+image:part010_sample/chapter020_cheatssheet/chapter020_020_image_sequence.svg[]

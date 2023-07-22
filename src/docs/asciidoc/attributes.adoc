@@ -1,0 +1,18 @@
+:encoding: utf-8
+:doctype: book
+:idprefix:
+:idseparator: -
+:toc-title: 目次
+:toc: left
+:toclevels: 2
+:tabsize: 4
+:numbered:
+:sectanchors:
+:sectnums:
+:hide-uri-scheme:
+:docinfo: shared,private
+:docinfodir: ../docinfo
+:imagesdir: ./images
+:attribute-missing: warn
+:chomp: default headers packages
+:homepage: https://samples

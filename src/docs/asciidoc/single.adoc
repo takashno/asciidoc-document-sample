@@ -1,0 +1,13 @@
+= AsciiDoc Document Sample
+include::attributes.adoc[]
+
+[[part010_sample]]
+
+[[part010_sample_chapter010_overview]]
+== 概要（部）
+include::part010_sample/chapter010_overview/chapter010_010_overview.adoc[leveloffset=+2]
+
+[[part010_sample_chapter020_cheatsheet]]
+== 記法サンプル（部）
+include::part010_sample/chapter020_cheatsheet/chapter020_010_cheatsheet.adoc[leveloffset=+2]
+include::part010_sample/chapter020_cheatsheet/chapter020_020_image.adoc[leveloffset=+2]

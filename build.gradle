@@ -1,0 +1,106 @@
+plugins {
+  id 'java'
+	id 'org.asciidoctor.jvm.base'
+	id 'org.asciidoctor.jvm.convert'
+	id 'org.asciidoctor.jvm.pdf'
+	id 'org.asciidoctor.jvm.gems'
+}
+
+group = "takashno"
+version = "1.0.0"
+
+repositories {
+	ruby.gems()
+	mavenCentral()
+	mavenLocal()
+}
+
+// asciidoctorj で使用するモジュール（拡張機能）の設定
+// see : https://asciidoctor.github.io/asciidoctor-gradle-plugin/development-3.x/user-guide/#asciidoctorj-modules
+asciidoctorj {
+	modules {
+		// asciidoctor-diagram を有効化
+		diagram {
+			version '1.5.16'
+		}
+		// asciidoctor-pdf を有効化
+		pdf {
+			version '1.5.3'
+		}
+	}
+}
+
+// 設定変更したい場合は、以下のように変更することができる
+// asciidoctor {
+//   sourceDir = file("${projectDir}/src/docs/asciidoc")
+//   outputDir = file("${buildDir}/docs/asciidoc")
+// }
+
+// asciidoctor へのパラメータ定義
+asciidoctor {
+	sourceDir file("src/docs/asciidoc")
+	baseDirFollowsSourceFile()
+	sources {
+		include "**/*.adoc"
+		exclude "single.adoc"
+	}
+  attributes = [
+    'documents-version': project.version
+  ]
+}
+
+// Singleページ用のAsciidoc変換タスク
+import org.asciidoctor.gradle.jvm.AsciidoctorTask
+
+task asciidoctorSingle(type: AsciidoctorTask) {
+	sourceDir file("src/docs/asciidoc")
+	baseDirFollowsSourceFile()
+	sources {
+		include "single.adoc"
+	}
+  attributes = [
+    'documents-version': project.version,
+    'imagesdir': './images'
+  ]
+}
+
+// asciidoctor-pdf へのパラメータ定義
+asciidoctorPdf {
+	sourceDir file("src/docs/asciidoc")
+	baseDirFollowsSourceFile()
+	sources {
+		include "single.adoc"
+	}
+	fontsDir file('pdf-theme/fonts')
+	theme 'org'
+  attributes = [
+    'documents-version': project.version,
+    'imagesdir': './images'
+  ]
+}
+
+
+// PDF出力に使用するテーマの定義
+// see : https://asciidoctor.github.io/asciidoctor-gradle-plugin/development-3.x/user-guide/#asciidoctorj-pdf-plugin
+pdfThemes {
+	local 'org', {
+		themeDir = file('pdf-theme')
+		themeName = 'org-theme.yml'
+	}
+}
+
+// Asciidoctorによる埋め込み型のPlantUML定義を利用しない場合は別途変換を行う
+// 特に問題がない限りは、極力adoc中にplantUMLを記述する方式が望ましい
+// see : https://github.com/cosminpolifronie/gradle-plantuml-plugin#how-to-use-it
+task plantUml(type: JavaExec) {
+  // GradlePluginの場合、古いVersionしか利用できない＋MavenCentralにも最新版が上がっていないので、ローカルでJar保持を致し方なくしている.
+  classpath = files("${projectDir}/3rd-party-libs/plantuml-1.2023.10.jar")
+  defaultCharacterEncoding = "UTF-8"
+  args = [
+    '-tsvg',
+    'src/docs/asciidoc/images/**/*.puml'
+  ]
+}
+
+// Task依存定義
+asciidoctor.dependsOn('plantUml')

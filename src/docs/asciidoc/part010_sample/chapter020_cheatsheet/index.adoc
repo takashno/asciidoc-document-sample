@@ -1,0 +1,11 @@
+include::../../attributes.adoc[]
+:docinfodir: ../../../docinfo
+:imagesdir: ../../images
+
+= 記法サンプル（部）
+
+AsciiDocの記法のサンプルや、画像関連のサンプルを掲載するページ.
+
+[horizontal]
+<<chapter020_010_cheatsheet#, AsciiDocチートシート（章）>> :: AsciiDocの記法サンプル
+<<chapter020_020_image#, 画像の使い方（章）>> :: AsciiDocの中で画像を扱う方法サンプル

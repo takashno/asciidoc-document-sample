@@ -1,0 +1,9 @@
+include::attributes.adoc[]
+
+本ドキュメントは、AsciiDocによるドキュメンテーション構築のサンプルです.
+
+[[part010_sample]]
+== サンプル（章）
+[horizontal]
+<<part010_sample/chapter010_overview/index#,概要（部）>> :: 概要説明.
+<<part010_sample/chapter020_cheatsheet/index#,記法サンプル（部）>> :: AsciiDocの記載方法や、画像関連のサンプルページ.
