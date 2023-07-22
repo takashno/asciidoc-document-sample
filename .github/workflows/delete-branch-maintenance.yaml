@@ -2,6 +2,10 @@ name: maintenance_enable_branches_json
 on:
   delete
 
+permissions:
+  actions: write
+  contents: write
+
 jobs:
   maintenance_enable_branches_json:
     runs-on: ubuntu-latest
