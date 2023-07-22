@@ -1,6 +1,6 @@
 [
   {"name": "main", "commit_id": "48ba62227b5ef45a93a8001ce90b88d1579c295e"},
   {"name": "develop", "commit_id": "48ba62227b5ef45a93a8001ce90b88d1579c295e"},
-  {"name": "feature/hoge", "commit_id": "48ba62227b5ef45a93a8001ce90b88d1579c295e"},
+  {"name": "feature/hoge", "commit_id": "e4b77fd256b53735554c68e0e3eb54676bd9ddd3"},
   {"name": "end", "commit_id": "end"}
 ]
