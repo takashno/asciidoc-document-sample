@@ -26,3 +26,10 @@ git add .
 git commit -m "init gh-pages."
 git push origin gh-pages
 ```
+
+=== GitHubPages の設定
+
+GitHubのリポジトリのSettingからPagesの設定を行う. +
+公開対象は、「 gh-pages 」ブランチの「 docs 」ディレクトリ配下とすること.
+
+image:readme-resource/github-pages-setting.png[]
