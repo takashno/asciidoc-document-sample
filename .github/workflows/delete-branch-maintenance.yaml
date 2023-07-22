@@ -4,6 +4,7 @@ on:
 
 jobs:
   maintenance_enable_branches_json:
+    runs-on: ubuntu-latest
     name: Maintenance Enable Branches JSON
     steps:
       - name: Checkout GitHub Pages
